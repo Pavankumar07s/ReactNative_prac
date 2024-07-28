@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -27,24 +28,28 @@ export default function App() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Your Goals here.."
-          onChangeText={goalInputHandle}
-          value={goal}
-        />
-        <TouchableOpacity style={styles.ButtonStyle} onPress={addGoalHandle}>
-          <Text style={{ color: "#fff" }}>Add Goal</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.GoalsContainer}>
-        {goals.map((goal, index) => (
-          <View style={styles.GoalItem} key={index}>
-            <Text style={{ color: "#fff" }}>{goal}</Text>
-          </View>
-        ))}
-      </View>
+      <ScrollView>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Your Goals here.."
+            onChangeText={goalInputHandle}
+            value={goal}
+          />
+          <TouchableOpacity style={styles.ButtonStyle} onPress={addGoalHandle}>
+            <Text style={{ color: "#fff" }}>Add Goal</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.GoalsContainer}>
+          <ScrollView>
+            {goals.map((goal, index) => (
+              <View style={styles.GoalItem} key={index}>
+                <Text style={{ color: "#fff" }}>{goal}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -55,6 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     margin: 16,
+    paddingBottom: 16,
     alignItems: "center",
     borderBottomWidth: 2,
     borderBottomColor: "#000",
@@ -82,7 +88,5 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: "#000",
   },
-  GoalText:{
-
-  },
+  GoalText: {},
 });
